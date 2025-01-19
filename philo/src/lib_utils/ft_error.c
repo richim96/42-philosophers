@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_write_error.c                                   :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: riccardomei <riccardomei@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 18:30:59 by riccardomei       #+#    #+#             */
-/*   Updated: 2025/01/11 18:38:29 by riccardomei      ###   ########.fr       */
+/*   Updated: 2025/01/19 17:57:46 by riccardomei      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int ft_strlen(const char *str)
     return (len);
 }
 
-/* Writes to standard error and returns error */
-int ft_write_error(const char *message)
+/* Writes to standard error and returns error state */
+int ft_error(const char *message)
 {
     write(2, message, ft_strlen(message));
     return (1);

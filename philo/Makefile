@@ -6,13 +6,13 @@
 #    By: riccardomei <riccardomei@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/04 18:25:01 by rmei              #+#    #+#              #
-#    Updated: 2025/01/11 18:36:29 by riccardomei      ###   ########.fr        #
+#    Updated: 2025/01/19 18:32:05 by riccardomei      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #### -- VARIABLES -- ####
 # Utilities
-UTILS_SRC = ft_atoi.c ft_write_error.c
+UTILS_SRC = ft_atoi.c ft_error.c ft_print_title.c
 UTILS_SRC := $(addprefix src/lib_utils/, ${UTILS_SRC})
 
 # Philo
