@@ -1,3 +1,7 @@
+# Local
+auto
+.DS_Store
+
 # Prerequisites
 *.d
 
