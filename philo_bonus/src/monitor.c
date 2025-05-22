@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:43:08 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 23:32:22 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/22 23:35:51 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int ft_check_meals(t_data *data)
 void ft_monitor_routine(t_data *data)
 {
     int i;
-    int status;
 
     while (1)
     {
