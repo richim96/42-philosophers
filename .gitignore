@@ -1,6 +1,7 @@
 # Local
 auto
 .DS_Store
+.cursor/
 
 # Prerequisites
 *.d
