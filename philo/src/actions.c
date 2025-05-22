@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_actions.c                                    :+:      :+:    :+:   */
+/*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:31:54 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 19:59:53 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/22 23:21:53 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void ft_print_status(t_philo *philo, char *status)
-{
-    pthread_mutex_lock(&philo->data->print);
-    if (!philo->data->is_dead)
-        printf("%lld %d %s\n", ft_get_time() - philo->data->start_time, philo->id, status);
-    pthread_mutex_unlock(&philo->data->print);
-}
 
 void ft_take_forks(t_philo *philo)
 {

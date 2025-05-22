@@ -6,15 +6,14 @@
 #    By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/22 19:38:06 by rmei              #+#    #+#              #
-#    Updated: 2025/05/22 19:59:47 by rmei             ###   ########.fr        #
+#    Updated: 2025/05/22 21:54:14 by rmei             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-CC = cc
 CPPFLAGS = -I./include
-CFLAGS = -Wall -Wextra -Werror -g
-SRC = philo.c init.c philo_actions.c monitor.c utils.c
+CFLAGS = -Wall -Wextra -Werror -D DEBUG_FORMATTING=1 -g
+SRC = actions.c init.c main.c monitor. utils.c
 SRC := $(addprefix src/, ${SRC})
 OBJS = $(SRC:.c=.o)
 
@@ -24,7 +23,7 @@ $(NAME): $(OBJS)
 	cc $^ -o $@
 
 %.o: %.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+	cc $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

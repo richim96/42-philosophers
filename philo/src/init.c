@@ -6,22 +6,28 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:30:16 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 20:00:05 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/22 23:23:07 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// Cannot use atoi, must be recreated from scratch (copy from libft)
+/**
+ * @brief Initializes the data structure with command line arguments
+ * @param data Pointer to the data structure to initialize
+ * @param argc Number of command line arguments
+ * @param argv Array of command line arguments
+ * @return 1 on success, 0 on failure
+ */
 int ft_init_data(t_data *data, int argc, char **argv)
 {
-    data->num_philos = atoi(argv[1]); 
-    data->time_to_die = atoi(argv[2]);
-    data->time_to_eat = atoi(argv[3]);
-    data->time_to_sleep = atoi(argv[4]);
+    data->num_philos = ft_atoi(argv[1]);
+    data->time_to_die = ft_atoi(argv[2]);
+    data->time_to_eat = ft_atoi(argv[3]);
+    data->time_to_sleep = ft_atoi(argv[4]);
     data->must_eat = -1;
     if (argc == 6)
-        data->must_eat = atoi(argv[5]);
+        data->must_eat = ft_atoi(argv[5]);
     data->is_dead = 0;
     data->start_time = ft_get_time();
     data->philos = malloc(sizeof(t_philo) * data->num_philos);
@@ -30,6 +36,11 @@ int ft_init_data(t_data *data, int argc, char **argv)
     return (1);
 }
 
+/**
+ * @brief Initializes all mutexes for forks and synchronization
+ * @param data Pointer to the data structure containing mutexes
+ * @return 1 on success, 0 on failure
+ */
 int ft_init_mutexes(t_data *data)
 {
     int i;
@@ -51,6 +62,11 @@ int ft_init_mutexes(t_data *data)
     return (1);
 }
 
+/**
+ * @brief Initializes philosopher structures with their initial values
+ * @param data Pointer to the data structure containing philosophers
+ * @return 1 on success, 0 on failure
+ */
 int ft_init_philos(t_data *data)
 {
     int i;
@@ -69,6 +85,10 @@ int ft_init_philos(t_data *data)
     return (1);
 }
 
+/**
+ * @brief Cleans up all allocated memory and mutexes
+ * @param data Pointer to the data structure to clean up
+ */
 void ft_memclean(t_data *data)
 {
     int i;

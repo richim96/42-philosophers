@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:32:03 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 20:01:10 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/22 23:24:30 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,18 @@ typedef struct s_data
 
 // Utility functions
 int         ft_atoi(const char *str);
+int         ft_write_fd(char *s, int fd);
 void        ft_usleep(long long time);
 long long   ft_get_time(void);
 void        ft_print_status(t_philo *philo, char *status);
 
-// Initialization functions
+// Initialization and cleanup functions
 int         ft_init_data(t_data *data, int argc, char **argv);
 int         ft_init_philos(t_data *data);
 int         ft_init_mutexes(t_data *data);
+void        ft_memclean(t_data *data);
 
-// Philosopher functions
+// Philosopher actions
 void        *ft_philo_routine(void *arg);
 void        ft_take_forks(t_philo *philo);
 void        ft_drop_forks(t_philo *philo);
@@ -69,8 +71,5 @@ void        ft_sleep_think(t_philo *philo);
 void        *ft_monitor_routine(void *arg);
 int         ft_check_death(t_data *data);
 int         ft_check_meals(t_data *data);
-
-// Cleanup functions
-void        ft_memclean(t_data *data);
 
 #endif 
