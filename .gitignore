@@ -2,6 +2,7 @@
 auto
 .DS_Store
 .cursor/
+.vscode/
 
 # Prerequisites
 *.d
