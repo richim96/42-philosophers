@@ -6,12 +6,16 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:31:54 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 23:21:53 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/22 23:30:43 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/**
+ * @brief Takes two forks for a philosopher
+ * @param philo Pointer to the philosopher structure
+ */
 void ft_take_forks(t_philo *philo)
 {
     pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
@@ -20,12 +24,20 @@ void ft_take_forks(t_philo *philo)
     ft_print_status(philo, "has taken a fork");
 }
 
+/**
+ * @brief Drops two forks for a philosopher
+ * @param philo Pointer to the philosopher structure
+ */
 void ft_drop_forks(t_philo *philo)
 {
     pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
     pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
 }
 
+/**
+ * @brief Makes a philosopher eat
+ * @param philo Pointer to the philosopher structure
+ */
 void ft_eat(t_philo *philo)
 {
     ft_print_status(philo, "is eating");
@@ -34,6 +46,10 @@ void ft_eat(t_philo *philo)
     ft_usleep(philo->data->time_to_eat);
 }
 
+/**
+ * @brief Makes a philosopher sleep and think
+ * @param philo Pointer to the philosopher structure
+ */
 void ft_sleep_think(t_philo *philo)
 {
     ft_print_status(philo, "is sleeping");
@@ -41,6 +57,11 @@ void ft_sleep_think(t_philo *philo)
     ft_print_status(philo, "is thinking");
 }
 
+/**
+ * @brief Main routine for each philosopher thread
+ * @param arg Pointer to the philosopher structure
+ * @return NULL
+ */
 void *ft_philo_routine(void *arg)
 {
     t_philo *philo;

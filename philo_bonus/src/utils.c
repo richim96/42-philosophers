@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:58:10 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 23:06:11 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/22 23:33:09 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ int	ft_atoi(const char *str)
 	return (result * sign);
 }
 
+/**
+ * @brief Writes a string to the given file descriptor
+ * @param s String to write
+ * @param fd File descriptor
+ * @return Number of bytes written
+ */
 int	ft_write_fd(char *s, int fd)
 {
     int len;
@@ -52,6 +58,10 @@ int	ft_write_fd(char *s, int fd)
 	return (len);
 }
 
+/**
+ * @brief Gets the current time in milliseconds
+ * @return Current time in milliseconds
+ */
 long long ft_get_time(void)
 {
     struct timeval tv;
@@ -60,6 +70,10 @@ long long ft_get_time(void)
     return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
+/**
+ * @brief Sleeps for the specified time in milliseconds
+ * @param time Time to sleep in milliseconds
+ */
 void ft_usleep(long long time)
 {
     long long start;
@@ -69,6 +83,11 @@ void ft_usleep(long long time)
         usleep(100);
 } 
 
+/**
+ * @brief Prints a message with timestamp and philosopher ID
+ * @param philo Pointer to the philosopher structure
+ * @param status Status message to print
+ */
 void ft_print_status(t_philo *philo, char *status)
 {
     sem_wait(philo->data->print);

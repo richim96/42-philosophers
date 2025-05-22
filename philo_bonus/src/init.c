@@ -6,12 +6,19 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:38:38 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 22:08:41 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/22 23:31:31 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
+/**
+ * @brief Initializes the data structure
+ * @param data Pointer to the data structure
+ * @param argc Number of arguments
+ * @param argv Array of arguments
+ * @return 1 if initialization was successful, 0 otherwise
+ */
 int ft_init_data(t_data *data, int argc, char **argv)
 {
     data->num_philos = ft_atoi(argv[1]);
@@ -31,6 +38,11 @@ int ft_init_data(t_data *data, int argc, char **argv)
     return (1);
 }
 
+/**
+ * @brief Initializes the semaphores
+ * @param data Pointer to the data structure
+ * @return 1 if initialization was successful, 0 otherwise
+ */
 int ft_init_semaphores(t_data *data)
 {
     sem_unlink("/forks");
@@ -47,6 +59,11 @@ int ft_init_semaphores(t_data *data)
     return (1);
 }
 
+/**
+ * @brief Initializes the philosophers
+ * @param data Pointer to the data structure
+ * @return 1 if initialization was successful, 0 otherwise
+ */
 int ft_init_philos(t_data *data)
 {
     int i;
@@ -63,11 +80,19 @@ int ft_init_philos(t_data *data)
     return (1);
 }
 
+/**
+ * @brief Frees the memory allocated for the philosophers
+ * @param data Pointer to the data structure
+ */
 void ft_philos_memclean(t_data *data)
 {
     free(data->philos);
 }
 
+/**
+ * @brief Cleans up the semaphores
+ * @param data Pointer to the data structure
+ */
 void ft_cleanup_semaphores(t_data *data)
 {
     sem_close(data->forks);
