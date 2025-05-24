@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:32:03 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 23:24:30 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/24 20:16:58 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_data
     int             time_to_eat;
     int             time_to_sleep;
     int             must_eat;
-    int             is_dead;
+    int             num_dead;
     long long       start_time;
     t_philo         *philos;
     pthread_mutex_t *forks;
@@ -47,21 +47,14 @@ typedef struct s_data
     pthread_t       monitor;
 } t_data;
 
-// Utility functions
-int         ft_atoi(const char *str);
-int         ft_write_fd(char *s, int fd);
-void        ft_usleep(long long time);
-long long   ft_get_time(void);
-void        ft_print_status(t_philo *philo, char *status);
-
 // Initialization and cleanup functions
 int         ft_init_data(t_data *data, int argc, char **argv);
 int         ft_init_philos(t_data *data);
 int         ft_init_mutexes(t_data *data);
-void        ft_memclean(t_data *data);
+void        ft_cleanup(t_data *data);
 
 // Philosopher actions
-void        *ft_philo_routine(void *arg);
+void        *ft_philo_routine(t_philo *philo);
 void        ft_take_forks(t_philo *philo);
 void        ft_drop_forks(t_philo *philo);
 void        ft_eat(t_philo *philo);
@@ -71,5 +64,12 @@ void        ft_sleep_think(t_philo *philo);
 void        *ft_monitor_routine(void *arg);
 int         ft_check_death(t_data *data);
 int         ft_check_meals(t_data *data);
+
+// Utility functions
+int         ft_atoi(const char *str);
+int         ft_write_fd(char *s, int fd);
+void        ft_usleep(long long time);
+long long   ft_get_time(void);
+void        ft_print_status(t_philo *philo, char *status);
 
 #endif 

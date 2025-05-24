@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:31:54 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 23:30:43 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/24 20:19:58 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,17 @@ void ft_sleep_think(t_philo *philo)
 
 /**
  * @brief Main routine for each philosopher thread
- * @param arg Pointer to the philosopher structure
- * @return NULL
+ * @param philo Pointer to the philosopher structure
+ * @return *NULL
  */
-void *ft_philo_routine(void *arg)
+void *ft_philo_routine(t_philo *philo)
 {
-    t_philo *philo;
-
-    philo = (t_philo *)arg;
     if (philo->id % 2 == 0)
         ft_usleep(1);
     while (1)
     {
         pthread_mutex_lock(&philo->data->death);
-        if (philo->data->is_dead)
+        if (philo->data->num_dead)
         {
             pthread_mutex_unlock(&philo->data->death);
             break;

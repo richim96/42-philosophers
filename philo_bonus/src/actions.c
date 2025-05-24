@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:40:31 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 23:31:12 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/24 16:35:23 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void ft_philo_routine(t_philo *philo)
     while (1)
     {
         sem_wait(philo->data->death);
-        if (philo->data->is_dead)
+        if (philo->data->num_dead)
         {
             sem_post(philo->data->death);
             break;

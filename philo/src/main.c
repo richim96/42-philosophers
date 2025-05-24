@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:31:59 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 23:05:09 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/24 20:16:36 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ static int ft_validate_and_init(t_data *data, int argc, char **argv)
     if (!ft_init_mutexes(data))
     {
         ft_write_fd("[ERROR]: Mutexes init failed\n", STDERR_FILENO);
-        ft_memclean(data);
+        ft_cleanup(data);
         return(1);
     }
     if (!ft_init_philos(data))
     {
         ft_write_fd("[ERROR]: Philosophers init failed\n", STDERR_FILENO);
-        ft_memclean(data);
+        ft_cleanup(data);
         return(1);
     }
     return (0);
@@ -78,11 +78,8 @@ int main(int argc, char **argv)
     pthread_create(&data.monitor, NULL, ft_monitor_routine, &data);
     i = 0;
     while (i < data.num_philos)
-    {
-        pthread_join(data.philos[i].thread, NULL);
-        i++;
-    }
+        pthread_join(data.philos[i++].thread, NULL);
     pthread_join(data.monitor, NULL);
-    ft_memclean(&data);
+    ft_cleanup(&data);
     return (0);
 } 

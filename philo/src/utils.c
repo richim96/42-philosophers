@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:45:33 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 23:28:17 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/24 16:35:23 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void ft_usleep(long long time)
 void ft_print_status(t_philo *philo, char *status)
 {
     pthread_mutex_lock(&philo->data->print);
-    if (!philo->data->is_dead)
+    if (!philo->data->num_dead)
         printf(
             "%lld %d %s\n",
             ft_get_time() - philo->data->start_time,

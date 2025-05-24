@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:43:38 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 23:03:05 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/24 20:07:11 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void ft_validate_and_init(t_data *data, int argc, char **argv)
     {
         ft_write_fd("[ERROR]: Philosophers init failed\n", STDERR_FILENO);
         ft_cleanup_semaphores(data);
-        ft_philos_memclean(data);
+        free(data->philos);
         exit(1);
     }
 }
@@ -85,11 +85,8 @@ int main(int argc, char **argv)
     ft_monitor_routine(&data);
     i = 0;
     while (i < data.num_philos)
-    {
-        kill(data.philos[i].pid, SIGKILL);
-        i++;
-    }
+        kill(data.philos[i++].pid, SIGKILL);
     ft_cleanup_semaphores(&data);
-    ft_philos_memclean(&data);
+    free(data.philos);
     return (0);
 } 

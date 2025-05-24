@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:43:08 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 23:35:51 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/24 16:35:23 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int ft_check_death(t_philo *philo)
         printf("%lld %d died\n", now - philo->data->start_time, philo->id);
         sem_post(philo->data->print);
         sem_wait(philo->data->death);
-        philo->data->is_dead = 1;
+        philo->data->num_dead = 1;
         sem_post(philo->data->death);
         return (1);
     }
@@ -54,7 +54,7 @@ int ft_check_meals(t_data *data)
         i++;
     }
     sem_wait(data->death);
-    data->is_dead = 1;
+    data->num_dead = 1;
     sem_post(data->death);
     return (1);
 }

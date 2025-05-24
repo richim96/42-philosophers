@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 21:38:38 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 23:31:31 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/24 20:00:50 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int ft_init_data(t_data *data, int argc, char **argv)
     data->must_eat = -1;
     if (argc == 6)
         data->must_eat = ft_atoi(argv[5]);
-    data->is_dead = 0;
+    data->num_dead = 0;
     data->start_time = ft_get_time();
     data->philos = malloc(sizeof(t_philo) * data->num_philos);
     if (!data->philos)
@@ -67,11 +67,13 @@ int ft_init_semaphores(t_data *data)
 int ft_init_philos(t_data *data)
 {
     int i;
+    int j;
 
     i = 0;
+    j = 1;
     while (i < data->num_philos)
     {
-        data->philos[i].id = i + 1;
+        data->philos[i].id = j++;
         data->philos[i].times_eaten = 0;
         data->philos[i].last_meal = data->start_time;
         data->philos[i].data = data;

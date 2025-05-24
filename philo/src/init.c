@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:30:16 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 23:23:07 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/24 20:16:36 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int ft_init_data(t_data *data, int argc, char **argv)
     data->must_eat = -1;
     if (argc == 6)
         data->must_eat = ft_atoi(argv[5]);
-    data->is_dead = 0;
+    data->num_dead = 0;
     data->start_time = ft_get_time();
     data->philos = malloc(sizeof(t_philo) * data->num_philos);
     if (!data->philos)
@@ -55,9 +55,9 @@ int ft_init_mutexes(t_data *data)
             return (0);
         i++;
     }
-    if (pthread_mutex_init(&data->print, NULL))
-        return (0);
     if (pthread_mutex_init(&data->death, NULL))
+        return (0);
+    if (pthread_mutex_init(&data->print, NULL))
         return (0);
     return (1);
 }
@@ -70,11 +70,13 @@ int ft_init_mutexes(t_data *data)
 int ft_init_philos(t_data *data)
 {
     int i;
+    int j;
 
     i = 0;
+    j = 1;
     while (i < data->num_philos)
     {
-        data->philos[i].id = i + 1;
+        data->philos[i].id = j++;
         data->philos[i].left_fork = i;
         data->philos[i].right_fork = (i + 1) % data->num_philos;
         data->philos[i].times_eaten = 0;
@@ -89,16 +91,13 @@ int ft_init_philos(t_data *data)
  * @brief Cleans up all allocated memory and mutexes
  * @param data Pointer to the data structure to clean up
  */
-void ft_memclean(t_data *data)
+void ft_cleanup(t_data *data)
 {
     int i;
 
     i = 0;
     while (i < data->num_philos)
-    {
-        pthread_mutex_destroy(&data->forks[i]);
-        i++;
-    }
+        pthread_mutex_destroy(&data->forks[i++]);
     pthread_mutex_destroy(&data->print);
     pthread_mutex_destroy(&data->death);
     free(data->forks);

@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:31:52 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/22 23:28:49 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/24 16:35:23 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int ft_check_death(t_data *data)
             printf("%lld %d died\n", now - data->start_time, data->philos[i].id);
             pthread_mutex_unlock(&data->print);
             pthread_mutex_lock(&data->death);
-            data->is_dead = 1;
+            data->num_dead = 1;
             pthread_mutex_unlock(&data->death);
             return (1);
         }
@@ -60,7 +60,7 @@ int ft_check_meals(t_data *data)
         i++;
     }
     pthread_mutex_lock(&data->death);
-    data->is_dead = 1;
+    data->num_dead = 1;
     pthread_mutex_unlock(&data->death);
     return (1);
 }
