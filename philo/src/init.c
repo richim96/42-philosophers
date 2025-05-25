@@ -6,14 +6,14 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:30:16 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/24 20:16:36 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/25 13:30:52 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 /**
- * @brief Initializes the data structure with command line arguments
+ * @brief Initializes the data structure with command line arguments.
  * @param data Pointer to the data structure to initialize
  * @param argc Number of command line arguments
  * @param argv Array of command line arguments
@@ -21,14 +21,14 @@
  */
 int ft_init_data(t_data *data, int argc, char **argv)
 {
-    data->num_philos = ft_atoi(argv[1]);
-    data->time_to_die = ft_atoi(argv[2]);
-    data->time_to_eat = ft_atoi(argv[3]);
-    data->time_to_sleep = ft_atoi(argv[4]);
+    data->num_philos = ft_atoi_strict(argv[1]);
+    data->time_to_die = ft_atoi_strict(argv[2]);
+    data->time_to_eat = ft_atoi_strict(argv[3]);
+    data->time_to_sleep = ft_atoi_strict(argv[4]);
     data->must_eat = -1;
     if (argc == 6)
-        data->must_eat = ft_atoi(argv[5]);
-    data->num_dead = 0;
+        data->must_eat = ft_atoi_strict(argv[5]);
+    data->terminate = 0;
     data->start_time = ft_get_time();
     data->philos = malloc(sizeof(t_philo) * data->num_philos);
     if (!data->philos)
@@ -37,7 +37,7 @@ int ft_init_data(t_data *data, int argc, char **argv)
 }
 
 /**
- * @brief Initializes all mutexes for forks and synchronization
+ * @brief Initializes all mutexes for forks and synchronization.
  * @param data Pointer to the data structure containing mutexes
  * @return 1 on success, 0 on failure
  */
@@ -57,13 +57,13 @@ int ft_init_mutexes(t_data *data)
     }
     if (pthread_mutex_init(&data->death, NULL))
         return (0);
-    if (pthread_mutex_init(&data->print, NULL))
+    if (pthread_mutex_init(&data->print_death, NULL))
         return (0);
     return (1);
 }
 
 /**
- * @brief Initializes philosopher structures with their initial values
+ * @brief Initializes philosopher structures with their initial values.
  * @param data Pointer to the data structure containing philosophers
  * @return 1 on success, 0 on failure
  */
@@ -88,7 +88,7 @@ int ft_init_philos(t_data *data)
 }
 
 /**
- * @brief Cleans up all allocated memory and mutexes
+ * @brief Cleans up all allocated memory and mutexes.
  * @param data Pointer to the data structure to clean up
  */
 void ft_cleanup(t_data *data)
@@ -98,7 +98,7 @@ void ft_cleanup(t_data *data)
     i = 0;
     while (i < data->num_philos)
         pthread_mutex_destroy(&data->forks[i++]);
-    pthread_mutex_destroy(&data->print);
+    pthread_mutex_destroy(&data->print_death);
     pthread_mutex_destroy(&data->death);
     free(data->forks);
     free(data->philos);

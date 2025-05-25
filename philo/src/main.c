@@ -6,37 +6,28 @@
 /*   By: rmei <rmei@student.42berlin.de>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 19:31:59 by rmei              #+#    #+#             */
-/*   Updated: 2025/05/24 20:16:36 by rmei             ###   ########.fr       */
+/*   Updated: 2025/05/25 12:48:05 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int  ft_validate_args(int argc, char **argv)
+static int  ft_is_input_valid(int argc, char **argv)
 {
     int i;
-    int j;
 
     if (argc != 5 && argc != 6)
         return (0);
     i = 1;
     while (i < argc)
-    {
-        j = 0;
-        while (argv[i][j])
-        {
-            if (argv[i][j] < '0' || argv[i][j] > '9')
-                return (0);
-            j++;
-        }
-        i++;
-    }
+        if (ft_atoi_strict(argv[i++]) <= 0)
+            return (0);
     return (1);
 }
 
 static int ft_validate_and_init(t_data *data, int argc, char **argv)
 {
-    if (!ft_validate_args(argc, argv))
+    if (!ft_is_input_valid(argc, argv))
     {
         ft_write_fd("[ERROR]: Invalid arguments\n", STDERR_FILENO);
         return(1);
